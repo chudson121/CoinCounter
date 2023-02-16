@@ -37,7 +37,7 @@ public class CoinValidator
     {
         //if nickels are all out, we need to have a till tracker for each coin type, and return 
 
-        if (runningTotal >= halfdollar) 
+        if (runningTotal >= halfdollar)
         {
             coins.Add(halfdollar);
             runningTotal -= halfdollar;
@@ -80,18 +80,13 @@ public class CoinValidator
 [TestFixture]
 public class CoinValidatorTests
 {
-    private CoinValidator coinvalidator;
+    private readonly CoinValidator coinValidator = new();
 
-    [SetUp]
-    public void Setup()
-    {
-        coinvalidator = new CoinValidator();
-    }
 
     [Test]
     public void CoinsToReturn_Returns()
     {
-        var retval = coinvalidator.CoinsToReturn(1);
+        var retval = coinValidator.CoinsToReturn(1);
         Assert.IsTrue(retval.Count() >= 0);
         Assert.IsTrue(retval[0] >= 0);
 
@@ -108,7 +103,7 @@ public class CoinValidatorTests
     [TestCase(99, ExpectedResult = new[] { 50, 25, 10, 10, 1, 1, 1, 1 })]
     public int[] CoinsToReturn_ReturnsMinimumCointCounts(int totalCoinValue)
     {
-        var retval = coinvalidator.CoinsToReturn(totalCoinValue);
+        var retval = coinValidator.CoinsToReturn(totalCoinValue);
         return retval;
 
     }
